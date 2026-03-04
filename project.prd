@@ -1,0 +1,92 @@
+Product Requirements Document: Telecom Calculator (telecomcalculator.com)
+
+**Product Vision:**
+Website that Allows project managers / stakeholders of new telecom projects to calculate the required technical parameters based on the input they receive from sales/marketing. There will be a number of different “calculator types” each service a specific use-case
+
+**Target Users:**
+Telecom engineers, acting as project managers
+Pre-sales engineers of telecom vendors, preparing a offer for a customer
+
+**Business Objectives:** 
+Become a popular tool people in telecom use routinely and share the results with colleagues
+
+**Success Metrics:** 
+Total number of users visiting the site
+Number of times when a new user comes to the site via “share results” link
+
+## User Personas
+
+### Persona 1: John, project manager for telco, 
+- **Demographics:** 40 y.o., education in business administration and basic IT knowledge
+- **Goals:** Convert The project goal in terms of subscribers using a new Telecom service into technical parameters such as number of concurrent calls that can be sent to Telecom vendors or implementation team
+- **Pain Points:** Knows the target number of users for example 1 million but does not know how to convert it into specific requirements for scalability such as number of transactions per second or required number of servers
+- **User Journey:** They enter the data they know, such as the number of users; they may adjust the modeling parameters to better fit it their specific business model or type of users; they see the results; and they can just use the numbers they see on the screen or they can share the current state of calculator with the team a URL
+
+### Persona 1: Roman, pre-sales engineer for telecom vendor, 
+- **Demographics:** 35 y.o., education in business administration and basic IT knowledge
+- **Goals:** Convert the project goal provide by the customer (e.g. the total number subscribers using a new Telecom service) into technical parameters such as number of transactions per second that can be used to determine the details of the offer & price for the customer
+- **Pain Points:** Doesn't understand how Translate of subscribers provided by the user into the technical parameters and how to explain to the customer that the proposed system has the correct capacity
+- **User Journey:** They enter the data provided by the customer, such as the number of users; they may adjust the modeling parameters to better fit it their specific business model or type of users; they see the results; And they can share the results with the customer so they can verify the data and perhaps adjust some parameters; once a customer confirms they can use the result to produce an offerL
+
+This website accessible from desktop and mobile will provide There will be several Types of calculators since they require different set of parameters and produce different output. Each calculator one or more mandatory parameters with the user has to fill in; a set of adjustment parameters which have some default values but can be tweaked to better match the situation; and a set of results 
+User stories
+As a user I access the Telecom calculator put in the estimated number of subscribers and the CV estimated transaction load which I use for correctly playing the capacity of my telecom deployment
+ is a user or access Telecom calculator to enter the data received from the customer number of concurrent calls converted into the number of transactions the system should handle and I click share button which copies to the clipboard to URL for the full set of current parameters of the calculator when I sent that link to the customer they see exactly the same data as I see. 
+
+Calculators
+Transaction load based on the number of subscribers
+ knowing an estimated number of subscribers I want to calculate the total load on the system all users will produce. 
+Input
+An estimated number of subscribers
+Adjustment parameters
+Which of the three services: voice calls, SMS and data will be provided; by default all three services are turned on 
+ number of voice calls made or received per month by an average user (default = 200)
+ number of SMS messages sent by an average user (default = 300)
+Average time (in seconds) for quota update of data sessions (default = 600)
+% of users with active sessions during peak hours to the total number of users (having an active product this month)
+ % of the traffic in the busiest hour of the day to the total activity for the day (cannot be more than 50; default = 10)
+A ratio between activity on a weekend day to the normal work day activity (default = 0.8)
+
+Results 
+Number of calls and the SMS processed during the busy hour
+number of active data sessions during busy hour
+Number of concurrent calls during the busy hour
+number of charging requests per second during the busy hour
+
+Formula
+TOTAL_VOICE_AND_SMS_PER_MONTH = NUM_SUBSCR * AVG_CALLS + NUM_SUBSCR * AVG_SMS
+AVG_DAY = (20 + 10 * ratio_between_weekend) / 30
+PER_DAY = TOTAL_VOICE_AND_SMS_PER_MONTH / AVG_DAY 
+BUSY_HOUR_VOICE_AND_SMS = PER_DAY * PERCENTAGE_BUSY_HOUR
+VOICE_AND_SMS_PER_SECOND = BUSY_HOUR_VOICE_AND_SMS / 3600
+ACTIVE_DATA_SESSIONS_BUSY_HOUR = NUM_SUBSCR * PERCENT_ACTIVE_DATA_SESSIONS
+DATA_CHARGING_PER_SECOND = ACTIVE_DATA_SESSIONS_BUSY_HOUR / DATA_SESSION_QUOTA_UPDATE
+TOTAL_TPS = VOICE_AND_SMS_PER_SECOND  + DATA_CHARGING_PER_SECOND 
+
+
+Transaction load based on concurrent calls
+Input
+A number of concurrent calls (CC)
+Adjustment parameters
+Average length of call (ALOC) in seconds, default = 180
+Average success rate (ASR) in %, default = 50
+Whether call authorization performed (checkbox), default = on
+Whether call start event is reported (checkbox), default = off
+
+
+Results 
+Number of charging requests per second (CPS)
+
+Formula
+BASE_CPS = (CC / ALOC) + (CC / ALOC) * (1 - ASR)
+CPS = BASE_CPS
+CPS += BASE_CPS if call authorization is on
+CPS += BASE_CPS if call start is on
+
+
+Functional requirements
+
+
+Tech stack
+Typescript, React, Tailwind, Zustand, Vite
+Deployed as a Docker container, provide a deployment script for GCP

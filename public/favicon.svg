@@ -1,0 +1,31 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="16" cy="16" r="15" fill="#2563eb" stroke="#1d4ed8" stroke-width="2"/>
+  
+  <!-- Calculator grid -->
+  <rect x="8" y="6" width="16" height="20" rx="2" fill="#ffffff"/>
+  
+  <!-- Display screen -->
+  <rect x="10" y="8" width="12" height="4" rx="1" fill="#1e40af"/>
+  
+  <!-- Calculator buttons -->
+  <!-- Row 1 -->
+  <circle cx="11.5" cy="15" r="1.5" fill="#2563eb"/>
+  <circle cx="16" cy="15" r="1.5" fill="#2563eb"/>
+  <circle cx="20.5" cy="15" r="1.5" fill="#2563eb"/>
+  
+  <!-- Row 2 -->
+  <circle cx="11.5" cy="18.5" r="1.5" fill="#2563eb"/>
+  <circle cx="16" cy="18.5" r="1.5" fill="#2563eb"/>
+  <circle cx="20.5" cy="18.5" r="1.5" fill="#2563eb"/>
+  
+  <!-- Row 3 -->
+  <circle cx="11.5" cy="22" r="1.5" fill="#2563eb"/>
+  <circle cx="16" cy="22" r="1.5" fill="#2563eb"/>
+  <circle cx="20.5" cy="22" r="1.5" fill="#2563eb"/>
+  
+  <!-- Signal waves for telecom theme -->
+  <path d="M4 16c0-6.627 5.373-12 12-12" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.7"/>
+  <path d="M6 16c0-5.523 4.477-10 10-10" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.5"/>
+  <path d="M8 16c0-4.418 3.582-8 8-8" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.3"/>
+</svg>
